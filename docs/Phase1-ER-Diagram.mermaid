@@ -1,0 +1,112 @@
+erDiagram
+    USERS ||--o| AGENTS : "has profile"
+    AGENTS ||--o{ PROPERTIES : "lists"
+    CATEGORIES ||--o{ PROPERTIES : "categorizes"
+    LOCATIONS ||--o{ PROPERTIES : "located in"
+    PROPERTIES ||--o{ GALLERIES : "has images"
+    PROPERTIES ||--o{ ENQUIRIES : "receives"
+    USERS ||--o{ ENQUIRIES : "submits"
+    AGENTS ||--o{ ENQUIRIES : "handles"
+    PROPERTIES ||--o{ PROPERTY_VIEWS : "tracked by"
+    PROPERTIES }o--o{ AMENITIES : "has"
+    USERS }o--o{ PROPERTIES : "saves (wishlist)"
+
+    USERS {
+        bigint id PK
+        varchar name
+        varchar email UK
+        timestamp email_verified_at
+        varchar password
+        enum role
+        varchar phone
+        varchar avatar
+        enum status
+    }
+
+    AGENTS {
+        bigint id PK
+        bigint user_id FK
+        varchar agency_name
+        varchar license_no
+        text bio
+        varchar whatsapp
+        tinyint experience_years
+        boolean is_verified
+    }
+
+    CATEGORIES {
+        bigint id PK
+        varchar name
+        varchar slug UK
+        varchar icon
+        text description
+    }
+
+    LOCATIONS {
+        bigint id PK
+        varchar city
+        varchar state
+        varchar country
+        varchar zip_code
+        decimal latitude
+        decimal longitude
+    }
+
+    PROPERTIES {
+        bigint id PK
+        bigint agent_id FK
+        bigint category_id FK
+        bigint location_id FK
+        varchar title
+        varchar slug UK
+        longtext description
+        enum listing_type
+        enum status
+        decimal price
+        decimal area_sqft
+        tinyint bedrooms
+        tinyint bathrooms
+        tinyint floors
+        year year_built
+        varchar address
+        decimal latitude
+        decimal longitude
+        varchar virtual_tour_video
+        varchar floor_plan_image
+        varchar cover_image
+        boolean is_featured
+        int views_count
+        timestamp deleted_at
+    }
+
+    GALLERIES {
+        bigint id PK
+        bigint property_id FK
+        varchar image_path
+        smallint sort_order
+    }
+
+    AMENITIES {
+        bigint id PK
+        varchar name
+        varchar icon
+    }
+
+    ENQUIRIES {
+        bigint id PK
+        bigint property_id FK
+        bigint user_id FK
+        bigint agent_id FK
+        varchar name
+        varchar email
+        varchar phone
+        text message
+        enum status
+    }
+
+    PROPERTY_VIEWS {
+        bigint id PK
+        bigint property_id FK
+        varchar ip_address
+        timestamp viewed_at
+    }

@@ -1,0 +1,193 @@
+/* ==========================================================================
+   RealEstatePro — Dashboard Shell Stylesheet
+   Folder: public/assets/css/dashboard.css
+   Loaded after theme.css, only on User/Agent/Admin dashboard layouts.
+   ========================================================================== */
+
+.rep-dash-body {
+  background: var(--rep-bg);
+}
+
+.rep-dash-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------------------
+   SIDEBAR
+   -------------------------------------------------------------------------- */
+.rep-dash-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, var(--rep-primary), var(--rep-primary-light));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 1040;
+  transition: transform 0.3s ease;
+}
+
+.rep-dash-sidebar-brand {
+  padding: var(--rep-space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rep-dash-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--rep-space-4) var(--rep-space-3);
+}
+
+.rep-dash-nav-section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+  padding: var(--rep-space-4) var(--rep-space-3) var(--rep-space-2);
+}
+
+.rep-dash-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.7rem var(--rep-space-3);
+  border-radius: var(--rep-radius-sm);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+  transition: var(--rep-transition);
+  text-decoration: none;
+}
+
+.rep-dash-nav-link i { font-size: 1.1rem; width: 20px; text-align: center; }
+
+.rep-dash-nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.rep-dash-nav-link.active {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  box-shadow: inset 3px 0 0 var(--rep-accent);
+}
+
+.rep-dash-nav-link .badge {
+  margin-left: auto;
+  background: var(--rep-accent);
+  color: #1a202c;
+}
+
+.rep-dash-sidebar-footer {
+  padding: var(--rep-space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.rep-dash-sidebar-footer .rep-dash-nav-link { color: rgba(255, 255, 255, 0.75); }
+.rep-dash-sidebar-footer .rep-dash-nav-link:hover { color: #fff; }
+
+.rep-dash-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1035;
+}
+
+/* --------------------------------------------------------------------------
+   MAIN / TOPBAR
+   -------------------------------------------------------------------------- */
+.rep-dash-main {
+  flex: 1;
+  margin-left: 260px;
+  min-width: 0;
+}
+
+.rep-dash-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  gap: var(--rep-space-3);
+  padding: var(--rep-space-4) var(--rep-space-5);
+  background: var(--rep-glass);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom: 1px solid var(--rep-border);
+}
+
+.rep-dash-menu-btn {
+  border: 1px solid var(--rep-border);
+  border-radius: var(--rep-radius-sm);
+  color: var(--rep-text);
+}
+
+.rep-dash-content {
+  padding: var(--rep-space-5);
+}
+
+.rep-avatar-sm {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--rep-accent);
+  color: #1a202c;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.rep-avatar-sm img { width: 100%; height: 100%; object-fit: cover; }
+
+.rep-avatar-lg {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  background: var(--rep-accent);
+  color: #1a202c;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 2rem;
+  overflow: hidden;
+  border: 4px solid var(--rep-surface);
+  box-shadow: var(--rep-shadow-md);
+}
+.rep-avatar-lg img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --------------------------------------------------------------------------
+   STAT CARDS
+   -------------------------------------------------------------------------- */
+.rep-dash-stat {
+  display: flex;
+  align-items: center;
+  gap: var(--rep-space-4);
+}
+.rep-dash-stat-icon {
+  width: 52px; height: 52px;
+  border-radius: var(--rep-radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — sidebar becomes an offcanvas below 992px
+   -------------------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+  .rep-dash-sidebar {
+    transform: translateX(-100%);
+  }
+  .rep-dash-sidebar.rep-sidebar-open {
+    transform: translateX(0);
+  }
+  .rep-dash-main {
+    margin-left: 0;
+  }
+  .rep-dash-backdrop.rep-backdrop-visible {
+    display: block;
+  }
+}
