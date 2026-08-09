@@ -23,7 +23,7 @@ class SavedPropertyController extends Controller
 
     /**
      * AJAX toggle, called from the heart icon on every property card
-     * (resources/views/components/property-card.blade.php, Phase 3).
+    
      */
     public function toggle(Request $request): JsonResponse
     {

@@ -10,7 +10,8 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    // India Timezone
+    'timezone' => 'Asia/Kolkata',
 
     'locale' => env('APP_LOCALE', 'en'),
 

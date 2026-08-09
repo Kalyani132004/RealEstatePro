@@ -13,8 +13,6 @@ class PropertySearchRequest extends FormRequest
 
     /**
      * All fields are optional — an empty filter set simply returns everything.
-     * 'sometimes' + 'nullable' means a present-but-empty field (e.g. a blank
-     * <select>) never throws a validation error; it's just treated as "no filter".
      */
     public function rules(): array
     {

@@ -18,8 +18,7 @@ class LoginController extends Controller
 
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Throttled Auth::attempt() lives on the Form Request itself (Phase 13)
-        // so the same rate-limiting logic can be unit tested in isolation.
+        
         $request->authenticate();
 
         $request->session()->regenerate();

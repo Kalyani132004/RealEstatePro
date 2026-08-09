@@ -11,10 +11,6 @@ use RuntimeException;
 
 /**
  * Handles large virtual-tour video uploads via client-side chunking
- * (see public/assets/js/video-upload.js). Browsers and PHP's own
- * upload_max_filesize/post_max_size defaults make a single multipart
- * POST unreliable for 50-100MB video files, so the file is split into
- * ~5MB chunks on the client and reassembled here.
  */
 class VideoUploadService
 {

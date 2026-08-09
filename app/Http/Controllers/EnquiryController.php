@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class EnquiryController extends Controller
 {
     /**
-     * Store a new enquiry, submitted via AJAX from the property details
-     * page enquiry form (resources/views/properties/show.blade.php, Phase 8).
-     * Both emails are queued Mailables (Phase 18) — sent via the 'database'
-     * queue driver so the HTTP response doesn't wait on SMTP round-trips.
+     * Store a new enquiry, submitted via AJAX from the property details.
      */
     public function store(EnquiryRequest $request): JsonResponse
     {

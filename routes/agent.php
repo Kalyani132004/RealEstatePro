@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Agent Routes
 |--------------------------------------------------------------------------
-| Required by: resources/views/agent/*.blade.php (Phase 6).
-| Controllers implemented in Phase 12, CRUD wired in Phase 14,
-| media upload wired in Phase 16/17.
+| Agent dashboard, property CRUD, gallery management,
+| video upload and enquiries.
+|--------------------------------------------------------------------------
 */
 
 Route::middleware(['auth', 'role:agent'])
@@ -21,23 +21,95 @@ Route::middleware(['auth', 'role:agent'])
     ->name('agent.')
     ->group(function () {
 
-        Route::get('/dashboard', [AgentDashboardController::class, 'index'])->name('dashboard');
+        /*
+        |--------------------------------------------------------------------------
+        | Dashboard
+        |--------------------------------------------------------------------------
+        */
 
-        // Resourceful property CRUD -> agent.properties.index/create/store/edit/update/destroy
-        Route::resource('properties', AgentPropertyController::class)->except(['show']);
+        Route::get('/dashboard', [AgentDashboardController::class, 'index'])
+            ->name('dashboard');
 
-        // Remove a single gallery image (used inline inside the edit form, Phase 6)
-        Route::delete('/properties/gallery/{gallery}', [GalleryController::class, 'destroy'])
-            ->name('properties.gallery.destroy');
 
-        // Chunked virtual-tour video upload — called by video-upload.js while the
-        // agent is still filling out the Add/Edit Property form (Phase 17).
-        Route::post('/properties/video-chunk', [VideoUploadController::class, 'storeChunk'])
-            ->name('properties.video-chunk');
+        /*
+        |--------------------------------------------------------------------------
+        | Property CRUD
+        |--------------------------------------------------------------------------
+        |
+        | IMPORTANT:
+        | {property:id} forces Laravel to find Property using ID,
+        | even though Property model uses slug as its default route key.
+        |
+        | Example:
+        | /agent/properties/2/edit
+        |
+        */
 
-        Route::get('/enquiries', [AgentEnquiryController::class, 'index'])->name('enquiries');
+        Route::get('/properties', [AgentPropertyController::class, 'index'])
+            ->name('properties.index');
 
-        // AJAX status update (rep-enquiry-status <select> in agent/enquiries.blade.php)
-        Route::patch('/enquiries/{enquiry}/status', [AgentEnquiryController::class, 'updateStatus'])
-            ->name('enquiries.update-status');
+        Route::get('/properties/create', [AgentPropertyController::class, 'create'])
+            ->name('properties.create');
+
+        Route::post('/properties', [AgentPropertyController::class, 'store'])
+            ->name('properties.store');
+
+        Route::get('/properties/{property:id}/edit', [AgentPropertyController::class, 'edit'])
+            ->name('properties.edit');
+
+        Route::put('/properties/{property:id}', [AgentPropertyController::class, 'update'])
+            ->name('properties.update');
+
+        Route::patch('/properties/{property:id}', [AgentPropertyController::class, 'update'])
+            ->name('properties.update');
+
+        Route::delete('/properties/{property:id}', [AgentPropertyController::class, 'destroy'])
+            ->name('properties.destroy');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Gallery Image Delete
+        |--------------------------------------------------------------------------
+        */
+
+        Route::delete(
+            '/properties/gallery/{gallery}',
+            [GalleryController::class, 'destroy']
+        )->name('properties.gallery.destroy');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Chunked Virtual Tour Video Upload
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post(
+            '/properties/video-chunk',
+            [VideoUploadController::class, 'storeChunk']
+        )->name('properties.video-chunk');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Agent Enquiries
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/enquiries', [AgentEnquiryController::class, 'index'])
+            ->name('enquiries');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Update Enquiry Status
+        |--------------------------------------------------------------------------
+        */
+
+        Route::patch(
+            '/enquiries/{enquiry}/status',
+            [AgentEnquiryController::class, 'updateStatus']
+        )->name('enquiries.update-status');
+
     });

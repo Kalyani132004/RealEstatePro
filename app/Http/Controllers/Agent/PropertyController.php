@@ -53,10 +53,7 @@ class PropertyController extends Controller
         $property = new Property($validated);
         $property->agent_id = $agent->id;
 
-        // Cover + floor plan: resized (max 1920px / 2400px) and re-encoded to
-        // WebP via ImageUploadService (Phase 16). Video was already uploaded
-        // in chunks via VideoUploadController before this form was submitted
-        // (Phase 17) — we just persist the resulting storage path here.
+        
         if ($request->hasFile('cover_image')) {
             $property->cover_image = $this->images->store($request->file('cover_image'), 'properties/covers', maxWidth: 1920, quality: 82);
         }
@@ -64,8 +61,7 @@ class PropertyController extends Controller
             $property->virtual_tour_video = $videoPath;
         }
         if ($request->hasFile('floor_plan_image')) {
-            // Floor plans need to stay sharp when the Phase 8 canvas viewer zooms in,
-            // so they get a larger max width and higher quality than regular photos.
+           
             $property->floor_plan_image = $this->images->store($request->file('floor_plan_image'), 'properties/floor-plans', maxWidth: 2400, quality: 90);
         }
 

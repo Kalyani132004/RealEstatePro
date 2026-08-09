@@ -65,15 +65,95 @@
                             </select>
                         </div>
                         <div class="col-lg-2 col-md-6">
-                            <button type="submit" class="rep-btn rep-btn-accent w-100">
+                            @guest
+                            <button type="button"
+                                    class="rep-btn rep-btn-primary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#loginRequiredModal">
                                 <i class="bi bi-search"></i> Search
                             </button>
+                            @else
+                            <button type="submit"
+                                    class="rep-btn rep-btn-primary">
+                                <i class="bi bi-search"></i> Search
+                            </button>
+                            @endguest
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </section>
+
+
+    {{-- Login Required Modal --}}
+    @guest
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rep-card">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Login Required
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body text-center">
+
+                    <i class="bi bi-lock"
+                    style="font-size:3rem;color:var(--rep-primary);">
+                    </i>
+
+                    <h5 class="mt-3">
+                        Please Login or Register
+                    </h5>
+
+                    <p class="rep-small">
+                        You need to login or register before searching properties.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer justify-content-center">
+
+                    <a href="{{ route('login') }}"
+                    class="rep-btn rep-btn-outline">
+                        Login
+                    </a>
+
+                    <a href="{{ route('register') }}"
+                    class="rep-btn rep-btn-primary">
+                        Register
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endguest
+
+
+    @push('scripts')
+    <script>
+    function showLoginMessage() {
+        const modalElement = document.getElementById('loginRequiredModal');
+
+        if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+    }
+    </script>
+    @endpush
+
+
+
 
     {{-- ============ STATS ============ --}}
     <section class="py-5" style="background: var(--rep-surface); margin-top: 3rem;">
@@ -100,6 +180,7 @@
     </section>
 
     {{-- ============ CATEGORIES ============ --}}
+    @auth
     <section class="rep-section" id="categories">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -121,9 +202,10 @@
             </div>
         </div>
     </section>
+    @endauth
 
     {{-- ============ FEATURED PROPERTIES ============ --}}
-    <section class="rep-section" style="background: var(--rep-surface);">
+    <!-- <section class="rep-section" style="background: var(--rep-surface);">
         <div class="container">
             <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
                 <div>
@@ -144,7 +226,7 @@
                 @endforelse
             </div>
         </div>
-    </section>
+    </section> -->
 
     {{-- ============ HOW IT WORKS ============ --}}
     <section class="rep-section" id="how-it-works">
@@ -186,6 +268,7 @@
     </section>
 
     {{-- ============ RECENT PROPERTIES ============ --}}
+    @auth
     <section class="rep-section" style="background: var(--rep-surface);">
         <div class="container">
             <div class="d-flex justify-content-between align-items-end mb-5" data-aos="fade-up">
@@ -208,6 +291,7 @@
             </div>
         </div>
     </section>
+    @endauth
 
     {{-- ============ CTA BANNER ============ --}}
     <section class="rep-section">

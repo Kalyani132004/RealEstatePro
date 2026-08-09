@@ -12,9 +12,15 @@
         <div class="collapse navbar-collapse d-none d-lg-flex">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link {{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.search') }}">Properties</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#categories">Categories</a></li>
+
+                @auth
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.search') }}">Properties</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#categories">Categories</a></li>
+                @endauth
+
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#how-it-works">How It Works</a></li>
+
                 <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#contact">Contact</a></li>
             </ul>
 
@@ -63,12 +69,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column">
-        <ul class="navbar-nav mb-4">
-            <li class="nav-item mb-2"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-            <li class="nav-item mb-2"><a class="nav-link" href="{{ route('properties.search') }}">Properties</a></li>
-            <li class="nav-item mb-2"><a class="nav-link" href="{{ route('home') }}#categories">Categories</a></li>
-            <li class="nav-item mb-2"><a class="nav-link" href="{{ route('home') }}#how-it-works">How It Works</a></li>
-            <li class="nav-item mb-2"><a class="nav-link" href="{{ route('home') }}#contact">Contact</a></li>
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a></li>
+
+            @auth
+                <li class="nav-item"><a class="nav-link {{ request()->routeIs('properties.*') ? 'active' : '' }}" href="{{ route('properties.search') }}">Properties</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#categories">Categories</a></li>
+            @endauth
+
+            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#how-it-works">How It Works</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#contact">Contact</a></li>
         </ul>
         <div class="mt-auto d-flex flex-column gap-2">
             <button type="button" class="rep-theme-toggle align-self-start mb-2" id="repThemeToggleMobile" aria-label="Toggle dark mode">
