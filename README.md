@@ -2,43 +2,48 @@
 
 A modern **Real Estate Property Listing & Management System** built using **Laravel 12**, **PHP 8.3**, **MySQL**, and **Bootstrap 5**.
 
-RealEstatePro allows buyers to search and save properties, agents to manage property listings, and administrators to manage the complete platform through a secure dashboard.
+RealEstatePro is a web-based property platform where users can browse and search properties, agents can manage their own property listings and enquiries, and administrators can manage the platform.
 
 ---
 
 # ✨ Features
 
-- User Authentication (Login/Register)
+- User Registration & Login
 - Role Based Access Control
-- Buyer/Renter Dashboard
+- User Dashboard
 - Agent Dashboard
 - Admin Dashboard
 - Property Listing Management
-- Advanced Property Search & Filters
+- Property Search
+- Property Filtering
 - Property Categories
 - Property Locations
 - Featured Properties
-- Property Details Page
+- Recent Properties
+- Property Details
 - Property Image Upload
-- Wishlist (Save Properties)
+- Wishlist / Favourite Properties
 - Property Enquiry System
+- Enquiry Status Management
+- Agent Enquiry Management
+- User Profile Management
 - Responsive Design
 - Dark / Light Theme
-- Secure Authentication
-- Profile Management
 
 ---
 
 # 👥 User Roles
 
-## 👤 Buyer / Renter
+## 👤 User / Buyer / Renter
 
 - Register & Login
 - Search Properties
+- Filter Properties
 - View Property Details
-- Save Favourite Properties
+- Save Properties to Wishlist
 - Send Property Enquiries
 - Manage Profile
+- Access User Dashboard
 
 ---
 
@@ -46,61 +51,47 @@ RealEstatePro allows buyers to search and save properties, agents to manage prop
 
 - Register as Agent
 - Login
-- Add New Properties
+- Add Properties
 - Edit Own Properties
 - Delete Own Properties
 - Upload Property Images
-- Manage Enquiries
-- View Dashboard
+- View Own Property Listings
+- Manage Property Enquiries
+- Update Enquiry Status
+- Access Agent Dashboard
 
----
-
-## 👑 Admin
-
-- Secure Admin Dashboard
-- Manage Users
-- Manage Agents
-- Manage Properties
-- Manage Categories
-- Manage Locations
-- View Reports
-- Platform Management
 
 ---
 
 # 🛠 Tech Stack
 
 ### Backend
-
 - Laravel 12
 - PHP 8.3
 - Eloquent ORM
 
 ### Frontend
-
 - Blade Templates
 - Bootstrap 5
 - HTML5
 - CSS3
 - JavaScript
+- Bootstrap Icons
 
 ### Database
-
 - MySQL
 
 ### Storage
-
 - Laravel Storage
 
 ### Authentication
-
 - Laravel Authentication
+- Role Based Access Control
 
 ---
 
 # 📂 Project Structure
 
-```
 app/
 bootstrap/
 config/
@@ -110,83 +101,74 @@ resources/
 routes/
 storage/
 tests/
-vendor/
 artisan
 composer.json
-```
 
 ---
 
 # 🚀 Installation
 
-Clone the repository
+### 1. Clone the Repository
 
-```bash
 git clone https://github.com/Kalyani132004/RealEstatePro.git
-```
 
-Go to project directory
+### 2. Go to Project Directory
 
-```bash
 cd RealEstatePro
-```
 
-Install Composer Packages
+### 3. Install Composer Packages
 
-```bash
 composer install
-```
 
-Generate Application Key
+### 4. Create Environment File
 
-```bash
+copy .env.example .env
+
+### 5. Generate Application Key
+
 php artisan key:generate
-```
 
-Run Migrations
+### 6. Configure Database
 
-```bash
+Update your .env file with your MySQL database configuration.
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=realestatepro
+DB_USERNAME=root
+DB_PASSWORD=
+
+### 7. Run Migrations
+
 php artisan migrate
-```
 
-Create Storage Link
+### 8. Create Storage Link
 
-```bash
 php artisan storage:link
-```
 
-Start Development Server
+### 9. Start Development Server
 
-```bash
 php artisan serve
-```
 
-Open Browser
+### 10. Open in Browser
 
-```
 http://127.0.0.1:8000
-```
 
 ---
 
+# 🔐 Access Control
 
-# 📌 Future Improvements
+RealEstatePro uses role-based access control.
 
-- Property Comparison
-- Mortgage Calculator
-- Google Maps Integration
-- Email Notifications
-- Property Reviews & Ratings
-- AI Property Recommendations
-- Online Property Booking
-- Chat Between Buyer & Agent
+- User → Property browsing, wishlist and enquiries
+- Agent → Own property and enquiry management
 
 ---
 
 # 👩‍💻 Developer
 
 **Kalyani Sonawane**
-
 
 GitHub:
 https://github.com/Kalyani132004
